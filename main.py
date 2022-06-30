@@ -63,15 +63,15 @@ def main() -> None:
     """Public static void main string args"""
     export_dir_name = 'export'
     img_formats = ['.webp', '.jfif']
-    dire = askdirectory(title="WHAT FOLDER WOULD YOU LIKE TO TARGET?").replace('/', '\\')
+    dire = askdirectory(title="WHAT FOLDER WOULD YOU LIKE TO TARGET?")
     files = collect_files_from_dir(dire, img_formats)
     create_new_dir(export_dir_name)
     for i, img_file in enumerate(files):
-        img_full_dir = dire + "\\" + img_file
+        img_full_dir = dire + "/" + img_file
         print(f'saving {img_file} as PNG')
         try:
             im = Image.open(img_full_dir).convert("RGBA")
-            im.save(f"{export_dir_name}\\{i}_{remove_suffix(img_file)}.png", "png")
+            im.save(f"{export_dir_name}/{i}_{remove_suffix(img_file)}.png", "png")
         except UnidentifiedImageError:
             logging.warning(f"Couldn't convert {img_file} for some reason")
 
